@@ -1,4 +1,5 @@
 import 'package:apps/Utils/database_helper.dart';
+import 'package:apps/Utils/theme.dart';
 import 'package:apps/models/User.dart';
 import 'package:flutter/material.dart';
 
@@ -23,46 +24,83 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: TextButton(
-            onPressed: () async {
-              await helper.batchInsert();
-              setState(() {});
-            },
-            child: const Text("Add"),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () async {
-                await helper.deleteAllUsers();
-                setState(() {});
-              },
-              child: const Text('Del'),
+      appBar: AppBar(),
+      body: const Center(
+        child: Text("Home"),
+      ),
+      drawer: Drawer(
+        backgroundColor: bgColor1,
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          // padding: EdgeInsets.zero,
+          children: [
+            Container(
+              height: 70,
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              decoration: const BoxDecoration(
+                color: bgColor2,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      icon: const Icon(
+                        Icons.dashboard,
+                        color: secondaryTextColor,
+                      )),
+                  Text(
+                    'Atresna',
+                    style: titleTextStyle.copyWith(fontWeight: FontWeight.w600),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Container(
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(10),
+                  ),
+                  color: bgColor2,
+                ),
+                margin: const EdgeInsets.only(right: 20),
+                child: ListTile(
+                  title: const Text('Item 1'),
+                  onTap: () {
+                    // Update the state of the app.
+                    // ...
+                  },
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Container(
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(10),
+                  ),
+                  color: bgColor2,
+                ),
+                margin: const EdgeInsets.only(right: 20),
+                child: ListTile(
+                  title: const Text('Item 1'),
+                  onTap: () {
+                    // Update the state of the app.
+                    // ...
+                  },
+                ),
+              ),
             ),
           ],
         ),
-        body: FutureBuilder<List<User>>(
-          future: helper.getAllUsers(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasError) {
-              return Center(child: Text('Error: ${snapshot.error}'));
-            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return const Center(child: Text('No users found.'));
-            } else {
-              final users = snapshot.data!;
-              return ListView.builder(
-                itemCount: users.length,
-                itemBuilder: (context, index) {
-                  final user = users[index];
-
-                  return _card(user, context);
-                },
-              );
-            }
-          },
-        ));
+      ),
+    );
   }
 }
 

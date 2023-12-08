@@ -10,3 +10,7 @@ const Color secondaryTextColor = Color(0xffF1F1F1);
 
 TextStyle primaryTextStyle = const TextStyle(color: primaryTextColor);
 TextStyle secondaryTextStyle = const TextStyle(color: secondaryTextColor);
+TextStyle titleTextStyle = const TextStyle(
+  color: secondaryTextColor,
+  fontSize: 18,
+);
