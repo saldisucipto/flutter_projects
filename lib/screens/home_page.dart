@@ -1,5 +1,6 @@
 import 'package:apps/Utils/database_helper.dart';
 import 'package:apps/Utils/theme.dart';
+import 'package:apps/components/card_panel.dart';
 import 'package:apps/models/User.dart';
 import 'package:flutter/material.dart';
 
@@ -75,8 +76,16 @@ class HomePageState extends State<HomePage> {
           )
         ],
       ),
-      body: const Center(
-        child: Text("Home"),
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Row(
+          children: [
+            CardPanel(
+              textCardTitle: "textCardTitle",
+              routeName: null,
+            )
+          ],
+        ),
       ),
       drawer: Drawer(
         backgroundColor: bgColor1,
