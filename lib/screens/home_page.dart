@@ -3,18 +3,18 @@ import 'package:apps/components/card_panel.dart';
 import 'package:apps/components/my_drawer.dart';
 import 'package:apps/components/my_header.dart';
 import 'package:apps/models/User.dart';
+import 'package:apps/services/provider/general_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
 
   @override
-  State<StatefulWidget> createState() {
-    return HomePageState();
-  }
+  ConsumerState<ConsumerStatefulWidget> createState() => _HomePageState();
 }
 
-class HomePageState extends State<HomePage> {
+class _HomePageState extends ConsumerState<HomePage> {
   final DatabaseHelper helper = DatabaseHelper();
   @override
   void initState() {
@@ -25,10 +25,11 @@ class HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var scaffoldKey = GlobalKey<ScaffoldState>();
+    var key = ref.watch(scaffoldKey);
+
     return Scaffold(
-      key: scaffoldKey,
-      appBar: myHeader(scaffoldKey: scaffoldKey),
+      key: key,
+      appBar: myHeader(scaffoldKey: key, context: context),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Row(

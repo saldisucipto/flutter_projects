@@ -1,7 +1,9 @@
 import 'package:apps/Utils/theme.dart';
 import 'package:flutter/material.dart';
 
-PreferredSizeWidget myHeader({required GlobalKey<ScaffoldState> scaffoldKey}) {
+PreferredSizeWidget myHeader(
+    {required GlobalKey<ScaffoldState> scaffoldKey,
+    required BuildContext context}) {
   // final GlobalKey<ScaffoldState> scaffoldKey;
   return AppBar(
     title: Text(
@@ -15,7 +17,7 @@ PreferredSizeWidget myHeader({required GlobalKey<ScaffoldState> scaffoldKey}) {
         color: secondaryTextColor,
       ),
       onPressed: () {
-        return scaffoldKey.currentState!.openDrawer();
+        Scaffold.of(context).openDrawer();
       },
     ),
     shape: const RoundedRectangleBorder(

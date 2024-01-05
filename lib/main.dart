@@ -2,9 +2,14 @@ import 'package:apps/screens/home_page.dart';
 import 'package:apps/screens/master_page.dart';
 import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 
   doWhenWindowReady(() {
     final win = appWindow;
