@@ -25,7 +25,7 @@ class DatabaseHelper {
     final io.Directory appDocumentsDir =
         await getApplicationDocumentsDirectory();
     String dbPath =
-        path1.join(appDocumentsDir.path, "databases", "mydsata.sqlite");
+        path1.join(appDocumentsDir.path, "Atresna Data", "atresna.sqlite");
     return await databaseFactory.openDatabase(
       dbPath,
       options: OpenDatabaseOptions(

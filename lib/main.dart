@@ -1,4 +1,5 @@
 import 'package:apps/screens/home_page.dart';
+import 'package:apps/screens/master_page.dart';
 import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 
@@ -30,7 +31,11 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      // home: const HomePage(),
+      routes: {
+        '/': (context) => const HomePage(),
+        MasterPage.routeName: (context) => const MasterPage(),
+      },
     );
   }
 }
