@@ -14,3 +14,8 @@ TextStyle titleTextStyle = const TextStyle(
   color: secondaryTextColor,
   fontSize: 18,
 );
+TextStyle menuTextStyle = const TextStyle(
+  color: Colors.white,
+  fontWeight: FontWeight.w600,
+  fontSize: 14,
+);
