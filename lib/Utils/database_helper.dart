@@ -24,8 +24,7 @@ class DatabaseHelper {
     final databaseFactory = databaseFactoryFfi;
     final io.Directory appDocumentsDir =
         await getApplicationDocumentsDirectory();
-    String dbPath =
-        path1.join(appDocumentsDir.path, "databases", "mydsata.sqlite");
+    String dbPath = path1.join(appDocumentsDir.path, "Atresna", "atresna.db");
     return await databaseFactory.openDatabase(
       dbPath,
       options: OpenDatabaseOptions(
@@ -38,11 +37,11 @@ class DatabaseHelper {
   Future<void> _onCreate(Database database, int version) async {
     final db = database;
     await db.execute(""" CREATE TABLE IF NOT EXISTS users(
-            id INTEGER PRIMARY KEY,
-            name TEXT,
-            email TEXT,
-            password INTEGER,
-            phoneNumber INTEGER
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name CHAR(100),
+            email CHAR(100),
+            password CHAR(255),
+            phoneNumber CHAR(13)
           )
  """);
   }
