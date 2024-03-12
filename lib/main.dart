@@ -1,4 +1,5 @@
 import 'package:apps/screens/home_page.dart';
+import 'package:apps/screens/master/master_produk.dart';
 import 'package:apps/screens/master_page.dart';
 import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const HomePage(),
         MasterPage.routeName: (context) => const MasterPage(),
+        MasterProdukScreen.routeName: (context) => const MasterProdukScreen(),
       },
     );
   }

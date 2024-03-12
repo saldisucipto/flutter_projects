@@ -1,34 +1,27 @@
-import 'package:apps/Utils/database_helper.dart';
 import 'package:apps/Utils/theme.dart';
-import 'package:apps/components/card_panel.dart';
 import 'package:apps/screens/master_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomePage extends ConsumerStatefulWidget {
-  const HomePage({super.key});
-
+class MasterProdukScreen extends StatefulWidget {
+  static const String routeName = 'master-produk-screen';
+  const MasterProdukScreen({super.key});
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _HomePageState();
+  State<StatefulWidget> createState() {
+    return _StateMasterProdukScreen();
+  }
 }
 
-class _HomePageState extends ConsumerState<HomePage> {
-  final DatabaseHelper helper = DatabaseHelper();
-  @override
-  void initState() {
-    super.initState();
-    WidgetsFlutterBinding.ensureInitialized();
-    helper.initWinDB();
-  }
-
+class _StateMasterProdukScreen extends State<MasterProdukScreen> {
   @override
   Widget build(BuildContext context) {
     var key = GlobalKey<ScaffoldState>();
+    var sizeScreen = MediaQuery.of(context).size;
+
     return Scaffold(
       key: key,
       appBar: AppBar(
         title: Text(
-          'Atresna Dashboard',
+          'Master Produk',
           style: titleTextStyle.copyWith(fontWeight: FontWeight.w600),
         ),
         backgroundColor: bgColor2,
@@ -75,61 +68,41 @@ class _HomePageState extends ConsumerState<HomePage> {
           )
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Row(
+      body: SafeArea(
+        child: Column(
           children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.6,
-              child: Column(
+            Container(
+              margin: const EdgeInsets.only(top: 20, right: 20, left: 20),
+              width: sizeScreen.width,
+              height: sizeScreen.height * 0.05,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.2,
+                  ElevatedButton(
+                    onPressed: () {
+                      _showFullModal(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: bgColor2,
+                    ),
                     child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Expanded(
-                          child: CardPanel(
-                            textCardTitle: "textCardTitle",
-                            routeName: null,
-                            bgColor: null,
-                            iconCard: null,
+                        Text(
+                          'Add New Data',
+                          style: TextStyle(
+                            color: secondaryTextColor,
                           ),
                         ),
-                        SizedBox(
-                          width: 10,
+                        Icon(
+                          Icons.add,
+                          color: secondaryTextColor,
                         ),
                       ],
                     ),
-                  ),
+                  )
                 ],
               ),
-            ),
-            const SizedBox(
-              width: 30,
-            ),
-            Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width * 0.35,
-              padding: const EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                color: Colors.black12,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: GridView.count(
-                crossAxisCount: 2,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-                children: const [
-                  CardPanel(
-                    textCardTitle: "textCardTitle",
-                    routeName: null,
-                    bgColor: Colors.white,
-                    iconCard: null,
-                  ),
-                ],
-              ),
-            ),
+            )
           ],
         ),
       ),
@@ -151,7 +124,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                 children: [
                   IconButton(
                       onPressed: () {
-                        Navigator.of(context).pop();
+                        Navigator.of(context).pushReplacementNamed('/');
                       },
                       icon: const Icon(
                         Icons.dashboard,
@@ -222,4 +195,37 @@ class _HomePageState extends ConsumerState<HomePage> {
       ),
     );
   }
+}
+
+_showFullModal(context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return Dialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+        child: Container(
+          constraints: const BoxConstraints(maxHeight: 350),
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                RichText(
+                  textAlign: TextAlign.justify,
+                  text: const TextSpan(
+                      text:
+                          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14,
+                          color: Colors.black,
+                          wordSpacing: 1)),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    },
+  );
 }
